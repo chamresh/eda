@@ -1,0 +1,44 @@
+part B
+A data analyst named Rehan maintains student records containing ID, Name, and Marks.
+
+He wants to manage this data efficiently using Python and Pandas.
+
+ANS:
+import pandas as pd
+
+def main():
+    n = int(input())
+    records = []
+    
+    # Reading initial student records
+    for _ in range(n):
+        ID, Name, Marks = input().split()
+        records.append([int(ID), Name, int(Marks)])
+        
+    df = pd.DataFrame(records, columns=["ID", "Name", "Marks"])
+    print("Initial DataFrame:")
+    print(df, "\n")
+    
+    # Insert new record
+    ID, Name, Marks = input().split()
+    new_record = pd.DataFrame([[int(ID), Name, int(Marks)]], columns=["ID", "Name", "Marks"])
+    df = pd.concat([df, new_record], ignore_index=True)
+    print("After Insertion:")
+    print(df, "\n")
+    
+    # Update marks
+    update_id, new_marks = input().split()
+    update_id = int(update_id)
+    new_marks = int(new_marks)
+    df.loc[df["ID"] == update_id, "Marks"] = new_marks
+    print(f"After Update (Marks Updated for ID {update_id}):")
+    print(df, "\n")
+    
+    # Delete record
+    delete_id = int(input())
+    df = df[df["ID"] != delete_id]
+    print(f"After Deletion (Record Deleted for ID {delete_id}):")
+    print(df)
+
+if _name_ == "_main_":
+    main()
