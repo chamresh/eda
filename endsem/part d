@@ -1,0 +1,36 @@
+Part D
+The objective of this analysis is to explore key aspects of order and delivery data to gain actionable insights. Specifically, we aim to:
+
+ANS:
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+orders=pd.read_csv("DA314_S4_OrderDetails_Data_Concept.csv")
+print(orders.head())
+# Violin plot for delivery over time for cities
+from turtle import color
+plt.figure(figsize=(10,6))
+sns.violinplot(x="city_restaurant", y="delivery_time_min", data=orders , color='#fae2d9')
+plt.title("Delivery time over time for cities")
+plt.xlabel("City")
+plt.ylabel("Delivery time (min)")
+plt.show()
+#
+sns.pairplot(orders,vars=['total_amount','rating','delivery_time_min'],
+    diag_kind='hist',
+    plot_kws={'color':'#ffa500'},
+)
+plt.show()
+#
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(24, 8))
+sns.histplot(data=orders, x='total_amount', kde=True, ax=axes[0])
+axes[0].set_title('Distribution of Total Amount')
+axes[0].set_xlabel('total_amount')
+sns.histplot(data=orders, x='rating', kde=True, ax=axes[1])
+axes[1].set_title('Distribution of Rating')
+axes[1].set_xlabel('rating')
+sns.histplot(data=orders, x='delivery_time_min', kde=True, ax=axes[2])
+axes[2].set_title('Distribution of Delivery Time')
+axes[2].set_xlabel('delivery_time_min')
+plt.tight_layout()
+plt.show()
