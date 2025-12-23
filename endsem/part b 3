@@ -1,0 +1,47 @@
+Part B
+The HR department wants to analyze workforce composition and satisfaction indicators to identify key factors influencing employee attrition. Using the Employee Performance dataset, the following analyses are required:
+
+ANS:
+import os
+import sys
+import pandas as pd
+import scipy.stats as stats
+
+# Get file name from user
+file_name = input("")
+
+# Prefix path with current script directory
+file_path = os.path.join(sys.path[0], file_name)
+
+# Load dataset
+df = pd.read_csv(file_path)
+
+# 1. YearsAtCompany
+print(df['YearsAtCompany'].describe().astype(int))
+print("median      ", df['YearsAtCompany'].median())
+print("mode        ", df['YearsAtCompany'].mode()[0])
+print("skewness    ", round(stats.skew(df['YearsAtCompany']), 2))
+print("\n")
+
+# 2. Age
+print(df['Age'].describe().astype(int))
+print("median      ", df['Age'].median())
+print("mode        ", df['Age'].mode()[0])
+print("skewness    ", round(stats.skew(df['Age']), 2))
+print("\n")
+
+# 3. Job Satisfaction & Environment Satisfaction
+print("Summary statistics of Job Satisfaction:")
+print("mode        ", df['JobSatisfaction'].mode()[0])
+print(df['JobSatisfaction'].describe().astype(int))
+print("Summary statistics of Environment Satisfaction:")
+print("mode        ", df['EnvironmentSatisfaction'].mode()[0])
+print(df['EnvironmentSatisfaction'].describe().astype(int))
+print("\n")
+
+# 4. Monthly Income
+print("Summary statistics of Monthly Income:")
+print(df['MonthlyIncome'].describe().astype(int))
+print("median      ", df['MonthlyIncome'].median())
+print("mode        ", df['MonthlyIncome'].mode()[0])
+print("skewness    ", round(stats.skew(df['MonthlyIncome']), 2))
