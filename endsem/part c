@@ -1,0 +1,35 @@
+Part C
+The purpose of this analysis is to examine the relationship between order amount and customer ratings using the FoodEato dataset. Specifically, we aim to:
+
+ANS:
+# Load libraries
+import os
+import sys
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+import numpy as np
+
+# --- Get input file name from user ---
+file_name = input("")
+file_path = os.path.join(sys.path[0], file_name)
+
+# --- Load dataset ---
+order_details_df = pd.read_csv(file_path)
+
+# --- Filter completed orders and select relevant columns ---
+order_data = order_details_df[order_details_df['order_status'] != 'Cancelled'][
+    ['total_amount', 'rating', 'avg_cost_for_two', 'delivery_time_min', 'delivery_pertner_pay']
+]
+
+# --- Relation between rating and total amount ordered ---
+df = order_data[['total_amount', 'rating']]
+
+# --- Pearson Correlation ---
+pearson_corr = df.corr(method='pearson')
+print("Pearson Correlation:\n", pearson_corr)
+
+# --- Spearman Correlation ---
+spearman_corr = df.corr(method='spearman')
+print("\nSpearman Correlation:\n",spearman_corr)
